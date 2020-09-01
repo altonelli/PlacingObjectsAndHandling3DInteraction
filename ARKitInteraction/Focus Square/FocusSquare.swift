@@ -198,6 +198,7 @@ class FocusSquare: SCNNode {
     // - Tag: Set3DPosition
     func setPosition(with raycastResult: ARRaycastResult, _ camera: ARCamera?) {
         let position = raycastResult.worldTransform.translation
+//        print(position)
         recentFocusSquarePositions.append(position)
         updateTransform(for: raycastResult, camera: camera)
     }
@@ -206,6 +207,7 @@ class FocusSquare: SCNNode {
     
     // - Tag: Set3DOrientation
     func updateOrientation(basedOn raycastResult: ARRaycastResult) {
+//        print(raycastResult.worldTransform.orientation)
         self.simdOrientation = raycastResult.worldTransform.orientation
     }
     

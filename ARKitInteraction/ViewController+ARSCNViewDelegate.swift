@@ -24,6 +24,20 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
             if self.objectsViewController?.viewIfLoaded?.window != nil {
                 self.objectsViewController?.updateObjectAvailability()
             }
+            
+            self.updatePrimaryObjectAvailability()
+//            else {
+                // Enable row if item can be placed at the current location
+//                if let query = sceneView.getRaycastQuery(for: self.primaryObject!.allowedAlignment),
+//                    let result = sceneView.castRay(for: query).first {
+//                    object.mostRecentInitialPlacementResult = result
+//                    object.raycastQuery = query
+//                    newEnabledVirtualObjectRows.insert(row)
+//                } else {
+//                    object.mostRecentInitialPlacementResult = nil
+//                    object.raycastQuery = nil
+//                }
+//            }
         }
     }
     

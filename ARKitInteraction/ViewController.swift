@@ -15,7 +15,10 @@ class ViewController: UIViewController {
     
     @IBOutlet var sceneView: VirtualObjectARView!
     
+    // Add ojbect used to pull up a selector menu in `showVirtualObjectSelectionViewController`, now will place plane in `placePaperplane`
     @IBOutlet weak var addObjectButton: UIButton!
+    
+    @IBOutlet weak var playButton: UIButton!
     
     @IBOutlet weak var blurView: UIVisualEffectView!
     
@@ -25,9 +28,20 @@ class ViewController: UIViewController {
 
     // MARK: - UI Elements
     
+    var primaryObject: VirtualObject? = .primaryObject
+    
+    var introAnimation:  SCNAnimation? // CAAnimation?
+    var circleAnimation:  SCNAnimation? // CAAnimation?
+    let introAnimationKey = "paperairplane_Intro-dup-1"
+    
+    // for ObjectPlacementDelegate
+    var lastObjectAvailabilityUpdateTimestamp: TimeInterval?
+    
     let coachingOverlay = ARCoachingOverlayView()
     
     var focusSquare = FocusSquare()
+    
+    var player: AVAudioPlayer?
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
@@ -56,12 +70,17 @@ class ViewController: UIViewController {
         return sceneView.session
     }
     
+    var currentEuler: SCNVector3?
+    var currentPosition: SCNVector3?
+    
     // MARK: - View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sceneView.delegate = self
+        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        sceneView.autoenablesDefaultLighting = true
         sceneView.session.delegate = self
         
         // Set up coaching overlay.
@@ -76,9 +95,27 @@ class ViewController: UIViewController {
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showVirtualObjectSelectionViewController))
+        let tapGesturePlane = UITapGestureRecognizer(target: self, action: #selector(placePaperplane))
         // Set the delegate to ensure this gesture is only used when there are no virtual objects in the scene.
         tapGesture.delegate = self
+        tapGesturePlane.delegate = self
         sceneView.addGestureRecognizer(tapGesture)
+        sceneView.addGestureRecognizer(tapGesturePlane)
+        
+        var idleModelName = "paperairplane-idle-converted"
+        let introModelName = "paperairplane_Intro-dup-zy-global"
+        let circleModelName = "paperairplane_Circle"
+//        let introModelName = "paperairplane-intro"
+        introAnimation = loadAnimation(introModelName)
+        circleAnimation = loadAnimation(circleModelName)
+        let fileURL = Bundle.main.path(forResource: "paperman-trimmed", ofType: "mp3")
+        do {
+            player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: fileURL!))
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        } catch {
+            print("AVAudioPlayer init failed")
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -108,6 +145,7 @@ class ViewController: UIViewController {
         virtualObjectInteraction.selectedObject = nil
         
         let configuration = ARWorldTrackingConfiguration()
+        configuration.worldAlignment = .gravity
         configuration.planeDetection = [.horizontal, .vertical]
         if #available(iOS 12.0, *) {
             configuration.environmentTexturing = .automatic
@@ -138,6 +176,7 @@ class ViewController: UIViewController {
             }
             if !coachingOverlay.isActive {
                 addObjectButton.isHidden = false
+                playButton.isHidden = false
             }
             statusViewController.cancelScheduledMessage(for: .focusSquare)
         } else {
@@ -146,6 +185,7 @@ class ViewController: UIViewController {
                 self.sceneView.pointOfView?.addChildNode(self.focusSquare)
             }
             addObjectButton.isHidden = true
+            playButton.isHidden = true
             objectsViewController?.dismiss(animated: false, completion: nil)
         }
     }

@@ -11,6 +11,10 @@ import ARKit
 
 class VirtualObject: SCNReferenceNode {
     
+//    static let PAPERPLANE_STATIONARY = "paperairplane_Stationary"
+    static let PAPERPLANE_STATIONARY = "paperairplane_Stationary-textured"
+    //    static let PAPERPLANE_STATIONARY = "paperairplanestraight1"
+    
     /// The model name derived from the `referenceURL`.
     var modelName: String {
         return referenceURL.lastPathComponent.replacingOccurrences(of: ".scn", with: "")
@@ -66,6 +70,8 @@ class VirtualObject: SCNReferenceNode {
 
 extension VirtualObject {
     // MARK: Static Properties and Methods
+    
+    
     /// Loads all the model objects within `Models.scnassets`.
     static let availableObjects: [VirtualObject] = {
         let modelsURL = Bundle.main.url(forResource: "Models.scnassets", withExtension: nil)!
@@ -75,10 +81,34 @@ extension VirtualObject {
         return fileEnumerator.compactMap { element in
             let url = element as! URL
 
-            guard url.pathExtension == "scn" && !url.path.contains("lighting") else { return nil }
+//            guard url.pathExtension == "scn" && !url.path.contains("lighting") else { return nil }
+            guard url.pathExtension == "scn" && url.path.contains("paperairplane") else { return nil }
 
             return VirtualObject(url: url)
         }
+    }()
+    
+    static let primaryObject: VirtualObject? = {
+        let modelsURL = Bundle.main.url(forResource: "Models.scnassets", withExtension: nil)!
+
+        let fileEnumerator = FileManager().enumerator(at: modelsURL, includingPropertiesForKeys: [])!
+        
+        var object: VirtualObject?
+
+        fileEnumerator.forEach({ element in
+            let url = element as! URL
+
+            if url.pathExtension == "scn" && url.path.contains(PAPERPLANE_STATIONARY) {
+                object = VirtualObject(url: url)
+            }
+        })
+        
+        if object != nil {
+            print("object found at \(object!.modelName): \(object!)")
+        } else {
+            print("uhoh object nil")
+        }
+        return object
     }()
     
     /// Returns a `VirtualObject` if one exists as an ancestor to the provided node.

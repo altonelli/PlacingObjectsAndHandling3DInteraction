@@ -55,6 +55,8 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
         sceneView.addGestureRecognizer(tapGesture)
+        let tapGesturePlane = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
+        sceneView.addGestureRecognizer(tapGesturePlane)
     }
     
     // - Tag: CreatePanGesture
@@ -68,36 +70,37 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     
     @objc
     func didPan(_ gesture: ThresholdPanGesture) {
-        switch gesture.state {
-        case .began:
-            // Check for an object at the touch location.
-            if let object = objectInteracting(with: gesture, in: sceneView) {
-                trackedObject = object
-            }
-            
-        case .changed where gesture.isThresholdExceeded:
-            guard let object = trackedObject else { return }
-            // Move an object if the displacment threshold has been met.
-            translate(object, basedOn: updatedTrackingPosition(for: object, from: gesture))
-
-            gesture.setTranslation(.zero, in: sceneView)
-            
-        case .changed:
-            // Ignore the pan gesture until the displacment threshold is exceeded.
-            break
-            
-        case .ended:
-            // Update the object's position when the user stops panning.
-            guard let object = trackedObject else { break }
-            setDown(object, basedOn: updatedTrackingPosition(for: object, from: gesture))
-            
-            fallthrough
-            
-        default:
-            // Reset the current position tracking.
-            currentTrackingPosition = nil
-            trackedObject = nil
-        }
+        print("touching...")
+//        switch gesture.state {
+//        case .began:
+//            // Check for an object at the touch location.
+//            if let object = objectInteracting(with: gesture, in: sceneView) {
+//                trackedObject = object
+//            }
+//            
+//        case .changed where gesture.isThresholdExceeded:
+//            guard let object = trackedObject else { return }
+//            // Move an object if the displacment threshold has been met.
+//            translate(object, basedOn: updatedTrackingPosition(for: object, from: gesture))
+//
+//            gesture.setTranslation(.zero, in: sceneView)
+//            
+//        case .changed:
+//            // Ignore the pan gesture until the displacment threshold is exceeded.
+//            break
+//            
+//        case .ended:
+//            // Update the object's position when the user stops panning.
+//            guard let object = trackedObject else { break }
+//            setDown(object, basedOn: updatedTrackingPosition(for: object, from: gesture))
+//            
+//            fallthrough
+//            
+//        default:
+//            // Reset the current position tracking.
+//            currentTrackingPosition = nil
+//            trackedObject = nil
+//        }
     }
     
     func updatedTrackingPosition(for object: VirtualObject, from gesture: UIPanGestureRecognizer) -> CGPoint {
@@ -126,17 +129,18 @@ class VirtualObjectInteraction: NSObject, UIGestureRecognizerDelegate {
     /// Handles the interaction when the user taps the screen.
     @objc
     func didTap(_ gesture: UITapGestureRecognizer) {
-        let touchLocation = gesture.location(in: sceneView)
-        
-        if let tappedObject = sceneView.virtualObject(at: touchLocation) {
-            
-            // If an object exists at the tap location, select it.
-            selectedObject = tappedObject
-        } else if let object = selectedObject {
-            
-            // Otherwise, move the selected object to its new position at the tap location.
-            setDown(object, basedOn: touchLocation)
-        }
+        print("tapped")
+//        let touchLocation = gesture.location(in: sceneView)
+//
+//        if let tappedObject = sceneView.virtualObject(at: touchLocation) {
+//
+//            // If an object exists at the tap location, select it.
+//            selectedObject = tappedObject
+//        } else if let object = selectedObject {
+//
+//            // Otherwise, move the selected object to its new position at the tap location.
+//            setDown(object, basedOn: touchLocation)
+//        }
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
