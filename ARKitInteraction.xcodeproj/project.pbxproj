@@ -18,6 +18,15 @@
 		3929C49F1E89EE4400E00B60 /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C49E1E89EE4400E00B60 /* Models.scnassets */; };
 		39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C0B9581E9C6B1F003FCA0C /* Utilities.swift */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
+		9E7FA56B2507142C003C5E79 /* ModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA56A2507142C003C5E79 /* ModelHandler.swift */; };
+		9E7FA56D2507174F003C5E79 /* HouseSketch.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA56C2507174F003C5E79 /* HouseSketch.mlmodel */; };
+		9E7FA57025071A2A003C5E79 /* CVPixelBufferHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA56F25071A2A003C5E79 /* CVPixelBufferHelpers.swift */; };
+		9E7FA57225071C0E003C5E79 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA57125071C0E003C5E79 /* Shaders.metal */; };
+		9E7FA57525072DFD003C5E79 /* MetalStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA57425072DFD003C5E79 /* MetalStuff.swift */; };
+		9E7FA57925072E9E003C5E79 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA57825072E9E003C5E79 /* Shaders.metal */; };
+		9E7FA57B2507344B003C5E79 /* BlackShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA57A2507344B003C5E79 /* BlackShader.metal */; };
+		9E7FA57D250B3224003C5E79 /* HouseSketch1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA57C250B3223003C5E79 /* HouseSketch1.mlmodel */; };
+		9E7FA57F250B395A003C5E79 /* HouseSketch2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 9E7FA57E250B395A003C5E79 /* HouseSketch2.mlmodel */; };
 		9EE62BA424D5F29A005BCA3D /* Sounds.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EE62BA324D5F29A005BCA3D /* Sounds.scnassets */; };
 		9EE62BA624D5F719005BCA3D /* paperman-trimmed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9EE62BA524D5F719005BCA3D /* paperman-trimmed.mp3 */; };
 		9EE62BA824D7B126005BCA3D /* ViewController+AnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE62BA724D7B126005BCA3D /* ViewController+AnimationDelegate.swift */; };
@@ -51,6 +60,17 @@
 		3929C49E1E89EE4400E00B60 /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		39C0B9581E9C6B1F003FCA0C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9E7FA56A2507142C003C5E79 /* ModelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHandler.swift; sourceTree = "<group>"; };
+		9E7FA56C2507174F003C5E79 /* HouseSketch.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HouseSketch.mlmodel; sourceTree = "<group>"; };
+		9E7FA56F25071A2A003C5E79 /* CVPixelBufferHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelBufferHelpers.swift; sourceTree = "<group>"; };
+		9E7FA57125071C0E003C5E79 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		9E7FA57325071C2F003C5E79 /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		9E7FA57425072DFD003C5E79 /* MetalStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalStuff.swift; sourceTree = "<group>"; };
+		9E7FA57725072E76003C5E79 /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		9E7FA57825072E9E003C5E79 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		9E7FA57A2507344B003C5E79 /* BlackShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = BlackShader.metal; sourceTree = "<group>"; };
+		9E7FA57C250B3223003C5E79 /* HouseSketch1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HouseSketch1.mlmodel; sourceTree = "<group>"; };
+		9E7FA57E250B395A003C5E79 /* HouseSketch2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HouseSketch2.mlmodel; sourceTree = "<group>"; };
 		9EE62BA324D5F29A005BCA3D /* Sounds.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; name = Sounds.scnassets; path = ARKitInteraction/Resources/Sounds.scnassets; sourceTree = "<group>"; };
 		9EE62BA524D5F719005BCA3D /* paperman-trimmed.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "paperman-trimmed.mp3"; sourceTree = "<group>"; };
 		9EE62BA724D7B126005BCA3D /* ViewController+AnimationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+AnimationDelegate.swift"; sourceTree = "<group>"; };
@@ -143,6 +163,7 @@
 		3929C48A1E89EC2C00E00B60 /* ARKitInteraction */ = {
 			isa = PBXGroup;
 			children = (
+				9E7FA56E25071A12003C5E79 /* Helpers */,
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
 				3929C48D1E89EC2C00E00B60 /* ViewController.swift */,
 				C8C12A701F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift */,
@@ -156,11 +177,16 @@
 				9EE62BA924D7B382005BCA3D /* AnimationDelegate.swift */,
 				9EE62BB024E59254005BCA3D /* CAAnimation+Extensions.swift */,
 				9EE62BAC24D9B1B0005BCA3D /* ObjectPlacementDelegate.swift */,
+				9E7FA57625072E5A003C5E79 /* Metal */,
+				9E7FA5692507140E003C5E79 /* ML */,
 				C40DF57B1EC2330700D9D59E /* Virtual Objects */,
 				113B64D01ECA81CA0071CBD1 /* Focus Square */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
 				1488324A1EFC3E9C0043E0AB /* Utilities */,
+				9E7FA4EF25013F39003C5E79 /* Model */,
 				1488324C1EFC3ED00043E0AB /* Resources */,
+				9E7FA57125071C0E003C5E79 /* Shaders.metal */,
+				9E7FA57325071C2F003C5E79 /* ShaderTypes.h */,
 			);
 			path = ARKitInteraction;
 			sourceTree = "<group>";
@@ -179,6 +205,43 @@
 				E1ECC1F4706C62A3B4DE0541 /* SampleCode.xcconfig */,
 			);
 			name = Configuration;
+			sourceTree = "<group>";
+		};
+		9E7FA4EF25013F39003C5E79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FA56C2507174F003C5E79 /* HouseSketch.mlmodel */,
+				9E7FA57C250B3223003C5E79 /* HouseSketch1.mlmodel */,
+				9E7FA57E250B395A003C5E79 /* HouseSketch2.mlmodel */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9E7FA5692507140E003C5E79 /* ML */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FA56A2507142C003C5E79 /* ModelHandler.swift */,
+			);
+			path = ML;
+			sourceTree = "<group>";
+		};
+		9E7FA56E25071A12003C5E79 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FA56F25071A2A003C5E79 /* CVPixelBufferHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9E7FA57625072E5A003C5E79 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				9E7FA57425072DFD003C5E79 /* MetalStuff.swift */,
+				9E7FA57A2507344B003C5E79 /* BlackShader.metal */,
+				9E7FA57725072E76003C5E79 /* ShaderTypes.h */,
+				9E7FA57825072E9E003C5E79 /* Shaders.metal */,
+			);
+			path = Metal;
 			sourceTree = "<group>";
 		};
 		9EE62BAB24D7BD34005BCA3D /* Sounds.scnassets */ = {
@@ -274,24 +337,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E7FA57225071C0E003C5E79 /* Shaders.metal in Sources */,
 				C812D8681F47628300344E73 /* ThresholdPanGesture.swift in Sources */,
+				9E7FA57F250B395A003C5E79 /* HouseSketch2.mlmodel in Sources */,
+				9E7FA57925072E9E003C5E79 /* Shaders.metal in Sources */,
+				9E7FA57D250B3224003C5E79 /* HouseSketch1.mlmodel in Sources */,
 				9EE62BAF24D9B996005BCA3D /* StatusViewController.swift in Sources */,
 				11BD822A1F09D750003F11C8 /* ViewController+ObjectSelection.swift in Sources */,
+				9E7FA56D2507174F003C5E79 /* HouseSketch.mlmodel in Sources */,
 				1488323F1EFC378A0043E0AB /* ViewController+Actions.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
 				9EE62BAA24D7B382005BCA3D /* AnimationDelegate.swift in Sources */,
 				9EE62BB124E59256005BCA3D /* CAAnimation+Extensions.swift in Sources */,
 				39C0B95A1E9C6B1F003FCA0C /* Utilities.swift in Sources */,
+				9E7FA57B2507344B003C5E79 /* BlackShader.metal in Sources */,
+				9E7FA57025071A2A003C5E79 /* CVPixelBufferHelpers.swift in Sources */,
 				147062641F06FA790003EE03 /* VirtualObjectSelection.swift in Sources */,
 				E187105E2253C46A003B54DA /* ViewController+CoachingOverlay.swift in Sources */,
 				C8C12A711F29277B00B011FE /* ViewController+ARSCNViewDelegate.swift in Sources */,
 				C8C2AC521F3A545C00E86BA3 /* VirtualObjectInteraction.swift in Sources */,
 				9EE62BA824D7B126005BCA3D /* ViewController+AnimationDelegate.swift in Sources */,
+				9E7FA57525072DFD003C5E79 /* MetalStuff.swift in Sources */,
 				C46356671EF9CC500080C8D9 /* VirtualObjectARView.swift in Sources */,
 				148832411EFC3B250043E0AB /* FocusSquareSegment.swift in Sources */,
 				C8D71A001F3B7D3D0086AD64 /* VirtualObject.swift in Sources */,
 				9EE62BAD24D9B1B0005BCA3D /* ObjectPlacementDelegate.swift in Sources */,
 				C42A71BD1E9C0AF200944367 /* FocusSquare.swift in Sources */,
+				9E7FA56B2507142C003C5E79 /* ModelHandler.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
 				C46356681EF9CC530080C8D9 /* VirtualObjectLoader.swift in Sources */,
 			);
@@ -438,7 +510,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8B6SRRV24;
 				INFOPLIST_FILE = "$(SRCROOT)/ARKitInteraction/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arthur.apple-samplecode.arkit-sample-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -459,7 +531,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8B6SRRV24;
 				INFOPLIST_FILE = "$(SRCROOT)/ARKitInteraction/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arthur.apple-samplecode.arkit-sample-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";

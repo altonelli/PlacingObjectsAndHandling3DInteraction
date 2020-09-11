@@ -8,6 +8,8 @@ Main view controller for the AR experience.
 import ARKit
 import SceneKit
 import UIKit
+import AVFoundation
+import Accelerate
 
 class ViewController: UIViewController {
     
@@ -25,7 +27,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     @IBOutlet weak var upperControlsView: UIView!
-
+    
+    let metalQueue = DispatchQueue(label: "MetalQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+    
+    var mostRecent: CVPixelBuffer?
+    let modelHandler: ModelDataHandler = ModelDataHandler()!
+    lazy var previewHeight = Int(1900)
+    lazy var previewWidth = Int(1128)
+    lazy var modelHeight: Int = modelHandler.sketchInputHeight
+    lazy var modelWidth: Int = modelHandler.sketchInputWidth
+    
+    var infoYpCbCrToARGB = vImage_YpCbCrToARGB()
+    var pixelRange = vImage_YpCbCrPixelRange(Yp_bias: 16,
+                                             CbCr_bias: 128,
+                                             YpRangeMax: 235,
+                                             CbCrRangeMax: 240,
+                                             YpMax: 235,
+                                             YpMin: 16,
+                                             CbCrMax: 240,
+                                             CbCrMin: 16)
+    
+//    let metalHandler = MetalStuff()
+    
     // MARK: - UI Elements
     
     var primaryObject: VirtualObject? = .primaryObject
@@ -77,6 +100,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         
         sceneView.delegate = self
         sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
@@ -116,6 +140,33 @@ class ViewController: UIViewController {
         } catch {
             print("AVAudioPlayer init failed")
         }
+        
+        var error = kvImageNoError
+            
+        error = vImageConvert_YpCbCrToARGB_GenerateConversion(
+                kvImage_YpCbCrToARGBMatrix_ITU_R_601_4!,
+                &pixelRange,
+                &infoYpCbCrToARGB,
+                kvImage422CbYpCrYp8,
+                kvImageARGB8888,
+                vImage_Flags(kvImageNoFlags))
+            
+        guard error == kvImageNoError else {
+            print("info error : \(error)")
+            fatalError("Failed to get image converter")
+        }
+    }
+    
+    func configureYpCbCrToARGBInfo() -> vImage_Error {
+        let error = vImageConvert_YpCbCrToARGB_GenerateConversion(
+            kvImage_YpCbCrToARGBMatrix_ITU_R_601_4!,
+            &pixelRange,
+            &infoYpCbCrToARGB,
+            kvImage422CbYpCrYp8,
+            kvImageARGB8888,
+            vImage_Flags(kvImageNoFlags))
+
+        return error
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -147,10 +198,15 @@ class ViewController: UIViewController {
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravity
         configuration.planeDetection = [.horizontal, .vertical]
+//        let videoFormat = ARConfiguration.VideoFormat
+//        videoFormat.framesPerSecond = 20
+//        configuration.videoFormat = videoFormat
         if #available(iOS 12.0, *) {
             configuration.environmentTexturing = .automatic
         }
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        
+        sceneView.preferredFramesPerSecond = 30
 
         statusViewController.scheduleMessage("FIND A SURFACE TO PLACE AN OBJECT", inSeconds: 7.5, messageType: .planeEstimation)
     }
